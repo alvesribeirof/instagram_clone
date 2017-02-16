@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8">
+
+		<title>Instagram Clone - WEB</title>
+
+		<!-- JQuery -->
+		<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+		<!-- bootstrap - link cdn -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+		<!-- incluindo css -->
+		<link href="/css/style.css" rel="stylesheet">
+
+	</head>
+
+	<body>
+
+		<div class="container home">
+            <div class="row">
+                <div class="col-md-2"></div>
+
+                <div class="col-md-4">
+                	<img src="/images/celulares.jpg" class="img-responsive img-center"/>
+                </div>
+
+                <div class="col-md-4 painel-login">
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<div class="row">
+								<% if(validacao.length > 0 ) { %>
+									<div class="alert alert-danger">
+										<strong>Atenção!</strong>
+											<ul>
+												<% for(var i = 0; i < validacao.length; i++) { %>
+													<li><%= validacao[i].msg %></li>
+												<% } %>
+											</ul>
+										</div>
+								<% } %>
+
+								<div class="col-md-12">
+
+									<img src="/images/logo1.jpg" class="img-responsive img-center" />
+									<br />
+
+									<form action="/cadastrar" method="post">
+                    <div class="form-group">
+											<input type="text" name="nomeCompleto" id="nomeCompleto" value="<%= dadosForm.nomeCompleto %>" class="form-control" placeholder="Nome Completo">
+										</div>
+
+                    <div class="form-group">
+											<input type="text" name="usuario" id="usuario" value="<%= dadosForm.usuario %>" class="form-control" placeholder="Nome de usuário">
+										</div>
+
+										<div class="form-group">
+											<input type="password" name="senha" id="senha" class="form-control" placeholder="Senha">
+										</div>
+
+                    <div class="form-group">
+											<input type="password" name="confirmaSenha" id="confirmaSenha" class="form-control" placeholder="Confirme a senha">
+										</div>
+
+										<div class="form-group">
+											<button type="submit" class="btn btn-primary btn-login">Cadastrar</button>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+                </div>
+
+                <div class="col-md-2"></div>
+            </div>
+        </div>
+
+	</body>
+</html>
