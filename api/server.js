@@ -1,6 +1,6 @@
 var express = require('express'),
 	bodyParser = require('body-parser'),
-	multiparty = require('connect-multiparty'),
+	multer = require('multer'),
 	mongodb = require('mongodb'),
 	objectId = require('mongodb').ObjectId,
 	fs = require('fs');
@@ -10,7 +10,8 @@ var app = express();
 //body-parser
 app.use(bodyParser.urlencoded({ extended : true}));
 app.use(bodyParser.json());
-app.use(multiparty({'uploadDir': 'D:\\Temp'}));
+
+var upload = multer({ dest: 'D:\\Temp' });
 
 app.use(function(req, res, next) {
 
@@ -41,14 +42,19 @@ app.get('/', function(req, res){
 });
 
 //POST (create)
-app.post('/api', function(req, res){
+app.post('/api', upload.single('arquivo'), function(req, res){
+
+	if (!req.file) {
+		res.status(400).json({ error: 'Arquivo nao enviado' });
+		return;
+	}
 
 	var date = new Date();
 	time_stamp = date.getTime();
 
-	var url_imagem = time_stamp + '_' + req.files.arquivo.originalFilename;
+	var url_imagem = time_stamp + '_' + req.file.originalname;
 
-	var path_origem = req.files.arquivo.path;
+	var path_origem = req.file.path;
 	var path_destino = './uploads/' + url_imagem;
 
 
